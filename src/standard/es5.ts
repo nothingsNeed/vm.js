@@ -1201,7 +1201,7 @@ export const es5: ES5Map = {
     );
     if (!func.prototype) func.prototype = {};
     func.prototype.constructor = func;
-    let entity = new func(...args, new This(null));
+    let entity = new func(...args);
 
     // stack track for Error constructor
     if (func === Error || entity instanceof Error) {
