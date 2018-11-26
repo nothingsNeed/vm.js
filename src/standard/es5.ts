@@ -976,6 +976,9 @@ export const es5: ES5Map = {
   },
   UnaryExpression(path) {
     const { node, scope } = path;
+    function tr(str){
+      return typeof str;
+    }
     return {
       "-": () => -path.evaluate(path.createChild(node.argument)),
       "+": () => +path.evaluate(path.createChild(node.argument)),
@@ -986,9 +989,9 @@ export const es5: ES5Map = {
       typeof: (): string => {
         if (isIdentifier(node.argument)) {
           const $var = scope.hasBinding(node.argument.name);
-          return $var ? typeof $var.value : UNDEFINED;
+          return $var ? tr($var.value) : UNDEFINED;
         } else {
-          return typeof path.evaluate(path.createChild(node.argument));
+          return tr(path.evaluate(path.createChild(node.argument)));
         }
       },
       delete: () => {
@@ -1196,6 +1199,7 @@ export const es5: ES5Map = {
     const args: any[] = node.arguments.map(arg =>
       path.evaluate(path.createChild(arg))
     );
+    if (!func.prototype) func.prototype = {};
     func.prototype.constructor = func;
     let entity = new func(...args, new This(null));
 
