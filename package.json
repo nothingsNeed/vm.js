@@ -13,7 +13,8 @@
     "precommit": "npm run lint && pretty-quick --staged",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "lint": "tslint -p ./ -c tslint.json",
-    "changelog": "npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 0",
+    "build-to-cocos": "rm -rf ./dist && tsc --outDir ./dist --target es5 && webpack --config ./webpack-es5.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "@types/node": "^9.6.0",
     "@types/webpack": "^4.4.0",
     "ava": "^0.25.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "coveralls": "^3.0.1",
