@@ -964,6 +964,9 @@ export const es5: ES5Map = {
 
     defineFunctionLength(func, node.params.length);
     defineFunctionName(func, node.id ? node.id.name : ""); // Anonymous function
+    if (node.id && node.id.name) {
+      scope.var(node.id.name, func);
+    }
 
     return func;
   },
