@@ -1106,16 +1106,7 @@ export const es5: ES5Map = {
       propertyName === "prototype" && types.isIdentifier(property);
 
     const target = isPrototype ? new Prototype(obj) : obj[propertyName];
-    function bind(target, obj) {
-      var result = target.bind(obj);
-      result.prototype = target.prototype;
-      return result;
-    }
-    return target instanceof Prototype
-      ? target
-      : isFunction(target)
-        ? bind(target, obj)
-        : target;
+    return target;
   },
   AssignmentExpression(path) {
     const { node, scope } = path;
