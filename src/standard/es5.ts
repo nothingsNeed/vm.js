@@ -175,6 +175,12 @@ export const es5: ES5Map = {
     if ($var) {
       return $var.value;
     } else {
+      if (scope.global) {
+        const $varp = scope.global.hasBinding('window');
+        if ($varp && $varp.value && $varp.value[node.name] !== undefined) {
+          return $varp.value[node.name];
+        }
+      }
       throw overriteStack(ErrNotDefined(node.name), stack, node);
     }
   },
